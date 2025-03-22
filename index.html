@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Salón Sagittarius - Lista de Precios y Servicios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Salón Sagittarius - Lista De Precios Y Servicios</title>
   <style>
     /* Estilos generales */
     body {
@@ -12,6 +12,7 @@
       background-color: rgba(185, 190, 158, 1); /* Fondo principal */
       color: #333;
       line-height: 1.6;
+      text-transform: capitalize; /* Primera letra de cada palabra en mayúscula */
     }
 
     /* Encabezado con animación de partículas */
@@ -23,8 +24,8 @@
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
+      text-transform: none; /* Mantener normal para logo/h1/p */
     }
-
     header::before {
       content: "";
       position: absolute;
@@ -36,10 +37,20 @@
       background-size: 20px 20px;
       animation: animateBackground 15s linear infinite;
     }
-
     @keyframes animateBackground {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    /* Logo habilitado */
+    .logo {
+      max-width: 300px;
+      margin-bottom: 10px;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
     }
 
     header h1 {
@@ -47,36 +58,17 @@
       font-size: 2.5em;
       font-weight: 700;
       animation: float 4s ease-in-out infinite;
+      text-transform: none; /* Mantener estilo normal */
     }
-
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50%      { transform: translateY(-10px); }
     }
-
     header p {
       font-size: 1.2em;
       margin-top: 10px;
       animation: fadeInUp 1s ease-in-out;
-    }
-
-    /* Logo con brillo */
-    .logo {
-      width: 300px;
-      height: 300px;
-      margin-bottom: 25px;
-      animation: bounce 2s infinite, logoGlow 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
-    }
-
-    @keyframes logoGlow {
-      0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); }
-      50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      text-transform: none; /* Mantener normal */
     }
 
     /* Contenedor principal */
@@ -87,6 +79,7 @@
       background: white;
       border-radius: 10px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      text-transform: none; /* Se hereda de body pero forzamos en encabezados */
     }
 
     /* Títulos de sección */
@@ -95,25 +88,27 @@
       padding: 15px;
       border-left: 5px solid rgba(188, 166, 119, 1); /* Color secundario */
       border-radius: 5px;
-      font-size: 1.8em;
+      font-size: 1.8em; 
       color: white;
       margin-top: 30px;
       animation: slideInLeft 0.5s ease-in-out;
+      text-transform: none; /* Mantener normal en h2 pero con la primera letra capital (lo ajustaremos en el texto) */
     }
-
+    h2::first-letter {
+      text-transform: uppercase;
+    }
     h2::after {
       content: "";
       display: block;
       width: 30px;
       height: 3px;
-      background: rgba(188, 166, 119, 1); /* Color secundario */
+      background: rgba(188, 166, 119, 1);
       margin-top: 10px;
       animation: pulseLine 2s infinite;
     }
-
     @keyframes pulseLine {
       0%, 100% { transform: scaleX(1); }
-      50% { transform: scaleX(1.5); }
+      50%      { transform: scaleX(1.5); }
     }
 
     /* Tablas con animación */
@@ -122,8 +117,8 @@
       border-collapse: collapse;
       margin-top: 20px;
       animation: tableEntrance 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      text-transform: none; /* Mantener normal para contenido */
     }
-
     @keyframes tableEntrance {
       from {
         opacity: 0;
@@ -134,74 +129,80 @@
         transform: translateY(0) perspective(0) rotateX(0);
       }
     }
-
+    caption {
+      text-align: left;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: none;
+    }
     th, td {
       text-align: left;
       padding: 15px;
       border-bottom: 1px solid #ddd;
+      text-transform: none; /* Evitar forzar capitalize en celdas */
     }
-
     th {
-      background: rgba(188, 166, 119, 1); /* Color secundario */
+      background: rgba(188, 166, 119, 1);
       color: white;
       font-weight: 600;
+      text-transform: none; 
     }
 
-    /* Animación para filas de tabla */
+    /* Animación de filas en la tabla */
     tbody tr {
       opacity: 0;
       animation: rowEntrance 0.6s ease-out forwards;
     }
-
     @keyframes rowEntrance {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
-
-    /* Retrasos escalonados para filas */
+    /* Retrasos escalonados */
     tbody tr:nth-child(1) { animation-delay: 0.1s; }
     tbody tr:nth-child(2) { animation-delay: 0.2s; }
     tbody tr:nth-child(3) { animation-delay: 0.3s; }
     tbody tr:nth-child(4) { animation-delay: 0.4s; }
     tbody tr:nth-child(5) { animation-delay: 0.5s; }
-
-    /* Efecto hover en filas */
     tbody tr:hover {
-      background-color: rgba(185, 190, 158, 0.2); /* Fondo principal con transparencia */
+      background-color: rgba(185,190,158,0.2);
       transition: background-color 0.3s ease;
+    }
+
+    /* ESTILO “PILL” PARA LOS PRECIOS */
+    .price-pill {
+      display: inline-block;
+      background-color: #f5efe6;  /* Color suave de fondo */
+      border-radius: 8px;
+      padding: 5px 12px;
+      color: #333;
+      font-weight: 700;
+      transition: transform 0.2s;
+      text-transform: none; /* Evitar forzar capitalize en los montos */
+    }
+    .price-pill:hover {
+      transform: scale(1.05);
     }
 
     /* Pie de página */
     footer {
       text-align: center;
       padding: 20px;
-      background: rgba(116, 122, 84, 1); /* Color principal */
+      background: rgba(116, 122, 84, 1);
       color: white;
       margin-top: 40px;
       font-size: 1em;
       animation: fadeInUp 1s ease-in-out;
+      text-transform: none; /* Mantener ortografía normal */
     }
 
     /* Animaciones generales */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes slideInLeft {
       from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
     /* Scroll suave */
@@ -211,19 +212,15 @@
 
     /* Responsividad */
     @media (max-width: 768px) {
-      .logo {
-        width: 120px;
-        height: 120px;
-      }
-
       header h1 {
         font-size: 2em;
       }
-
+      .logo {
+        max-width: 150px;
+      }
       h2 {
         font-size: 1.5em;
       }
-
       th, td {
         padding: 10px;
       }
@@ -231,197 +228,172 @@
   </style>
 </head>
 <body>
-
-  <!-- Encabezado principal -->
   <header>
     <img src="logo.png" alt="Logo Salón Sagittarius" class="logo" />
     <h1>Salón Sagittarius</h1>
-    <p>Explora nuestros servicios de uñas, cabello y tratamientos.</p>
+    <p>Explora Nuestros Servicios De Uñas, Cabello Y Tratamientos.</p>
   </header>
 
   <div class="container">
 
-    <!-- UÑAS (NO MODIFICAR PRECIOS) -->
-    <section>
-      <h2>Uñas</h2>
-      <table>
-        <caption>Servicios de uñas y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1 postura de 1 uña en gel (+200 extra según la forma)</td><td>200</td></tr>
-          <tr><td>1 postura de 1 uña en resina (+200 extra según la forma)</td><td>200</td></tr>
-          <tr><td>Baby boomer</td><td>Desde 1,700</td></tr>
-          <tr><td>Diseño con piedras</td><td>Desde 150</td></tr>
-          <tr><td>Forma especial (estilo personalizado)</td><td>200 extra</td></tr>
-          <tr><td>Frensh pintado en gel</td><td>200 extra</td></tr>
-          <tr><td>Frensh perfectos en acrílico</td><td>Desde 2,000</td></tr>
-          <tr><td>Guantes de colágeno</td><td>500</td></tr>
-          <tr><td>Maní + gel (mujer)</td><td>850</td></tr>
-          <tr><td>Maní gel (hombre)</td><td>800</td></tr>
-          <tr><td>Maní normal</td><td>500</td></tr>
-          <tr><td>Maní seco pintura normal</td><td>450</td></tr>
-          <tr><td>Manos + pies juntos (hombre)</td><td>1,500</td></tr>
-          <tr><td>Parafina</td><td>500</td></tr>
-          <tr><td>Papel oro</td><td>200</td></tr>
-          <tr><td>Pedí normal + bomba</td><td>800</td></tr>
-          <tr><td>Pintura en gel</td><td>550</td></tr>
-          <tr><td>Pintura normal</td><td>350</td></tr>
-          <tr><td>Postura de resina blanca (manos) (+200 extra según la forma)</td><td>1,500</td></tr>
-          <tr><td>Postura de resina blanca (pies) (+200 extra según la forma)</td><td>1,500</td></tr>
-          <tr><td>Postura de resina de color (manos) (+200 extra según la forma)</td><td>1,200</td></tr>
-          <tr><td>Postura de resina de color (pies) (+200 extra según la forma)</td><td>1,200</td></tr>
-          <tr><td>Retoque de resina color</td><td>1,200</td></tr>
-          <tr><td>Retoque normal</td><td>600</td></tr>
-          <tr><td>Retoques de resina blanca</td><td>1,200</td></tr>
-          <tr><td>Retiro de gel</td><td>250</td></tr>
-          <tr><td>Retiro de gel con máquina</td><td>150</td></tr>
-          <tr><td>Retiro de uñas</td><td>300</td></tr>
-          <tr><td>Rubber</td><td>1,200</td></tr>
-          <tr><td>Vela terapia</td><td>300</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 1. SERVICIOS DE UÑAS (EN ORDEN EXACTO) -->
+    <h2>Servicios De Uñas Y Sus Precios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manicura Regular</strong></td><td><span class="price-pill">$500</span></td></tr>
+        <tr><td><strong>Pintura Regular</strong></td><td><span class="price-pill">$350</span></td></tr>
+        <tr><td><strong>Pintura En Gel</strong></td><td><span class="price-pill">$550</span></td></tr>
+        <tr><td><strong>Retiro De Gel</strong></td><td><span class="price-pill">$250</span></td></tr>
+        <tr><td><strong>Retiro De Gel Con Máquina Sino Se Va A Pintar</strong></td><td><span class="price-pill">$150</span></td></tr>
+        <tr><td><strong>Mani + Gel (Mujer)</strong></td><td><span class="price-pill">$850</span></td></tr>
+        <tr><td><strong>Mani + Gel (Hombre)</strong></td><td><span class="price-pill">$800</span></td></tr>
+        <tr><td><strong>Postura De Acrílico Normal (200 Extra Según La Forma)</strong></td><td><span class="price-pill">Desde $700</span></td></tr>
+        <tr><td><strong>Retoque De Acrílico Normal</strong></td><td><span class="price-pill">$600</span></td></tr>
+        <tr><td><strong>Postura De 1 Uña En Acrílico</strong></td><td><span class="price-pill">$150</span></td></tr>
+        <tr><td><strong>Postura Normal + Gel</strong></td><td><span class="price-pill">Desde $1200</span></td></tr>
+        <tr><td><strong>Postura De Resina Blanca (Manos) (+200 Extra Según La Forma)</strong></td><td><span class="price-pill">Desde $1500</span></td></tr>
+        <tr><td><strong>Baby Boomer (+200 Extra Según La Forma)</strong></td><td><span class="price-pill">$1700</span></td></tr>
+        <tr><td><strong>Postura De Resina De Color (Manos)  (+200 Extra Según La Forma)</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Retoques De Resinas</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Postura De 1 Uña En Resina</strong></td><td><span class="price-pill">$200</span></td></tr>
+        <tr><td><strong>French Perfecto En Acrílico (+200 Extra Según La Forma)</strong></td><td><span class="price-pill">$2000</span></td></tr>
+        <tr><td><strong>Retiro De Resina</strong></td><td><span class="price-pill">$300</span></td></tr>
+        <tr><td><strong>Aplicación De Builder + Gel</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Diseños Elaborados (Piedras, Crom, Relieves, Papel Oro Etc)</strong></td><td><span class="price-pill">$150</span></td></tr>
+        <tr><td><strong>Crom, Efecto Espejo, Efecto Gato Todas Las Uñas</strong></td><td><span class="price-pill">$500 Extra</span></td></tr>
+        <tr><td><strong>Pedicura Regular</strong></td><td><span class="price-pill">$800</span></td></tr>
+        <tr><td><strong>Pedicura + Gel</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Full Set En Resina Pies</strong></td><td><span class="price-pill">Color $1200, Blanca $1500</span></td></tr>
+        <tr><td><strong>Postura De 2 Uñas Acrílico Normal</strong></td><td><span class="price-pill">$400</span></td></tr>
+        <tr><td><strong>Guantes De Colágeno, Parafina</strong></td><td><span class="price-pill">$500</span></td></tr>
+        <tr><td><strong>Vela Terapia</strong></td><td><span class="price-pill">$300</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- SECADOS (CON "DESDE") -->
-    <section>
-      <h2>Secados</h2>
-      <table>
-        <caption>Servicios de secado y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Cabello corto (hombro)</td><td>Desde 600</td></tr>
-          <tr><td>Cabello corto (nuca)</td><td>Desde 500</td></tr>
-          <tr><td>Cabello extra largo</td><td>Desde 900</td></tr>
-          <tr><td>Cabello largo</td><td>Desde 800</td></tr>
-          <tr><td>Cabello medio largo</td><td>Desde 700</td></tr>
-          <tr><td>Cabellos con extensiones</td><td>Desde 1,100</td></tr>
-          <tr><td>Ondas</td><td>Desde 1,200</td></tr>
-          <tr><td>Planchado</td><td>Desde 200</td></tr>
-          <tr><td>Planchado a vapor</td><td>Desde 250</td></tr>
-          <tr><td>Secado directo</td><td>Desde 100 extra</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 2. SECADOS -->
+    <h2>Secados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cabello Corto (Nuca)</strong></td><td><span class="price-pill">$500</span></td></tr>
+        <tr><td><strong>Cabello Corto (Arriba De Los Hombros)</strong></td><td><span class="price-pill">$600</span></td></tr>
+        <tr><td><strong>Cabello Hombro Extra (Abundante)</strong></td><td><span class="price-pill">$700</span></td></tr>
+        <tr><td><strong>Cabello Medio/ Largo (De Hombro Al Brasier)</strong></td><td><span class="price-pill">$800</span></td></tr>
+        <tr><td><strong>Cabello Medio/ Largo (Abundante)</strong></td><td><span class="price-pill">$900</span></td></tr>
+        <tr><td><strong>Cabello Extra Largo</strong></td><td><span class="price-pill">$1000</span></td></tr>
+        <tr><td><strong>Cabello Con Extensiones</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Ondas</strong></td><td><span class="price-pill">Desde $1200</span></td></tr>
+        <tr><td><strong>Planchado Al Secado Extra</strong></td><td><span class="price-pill">$200</span></td></tr>
+        <tr><td><strong>Planchado A Vapor Extra</strong></td><td><span class="price-pill">$250</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- CORTES (CON "DESDE") -->
-    <section>
-      <h2>Cortes</h2>
-      <table>
-        <caption>Servicios de corte y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Cortes de puntas</td><td>Desde 1,300</td></tr>
-          <tr><td>Cortes elaborados</td><td>Desde 1,500</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 3. LAVADOS CON LÍNEA (DE MAYOR A MENOR) -->
+    <h2>Lavados Con Línea</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Redken (Protección Color, Frizz Dismiss, Extreme)</strong></td><td><span class="price-pill">$1500</span></td></tr>
+        <tr><td><strong>Matrix Verde, Emulpon, Biolage</strong></td><td><span class="price-pill">$1200</span></td></tr>
+        <tr><td><strong>Combinaciones De Otras Líneas</strong></td><td><span class="price-pill">$1000</span></td></tr>
+        <tr><td><strong>Aplicación De Ampollas</strong></td><td><span class="price-pill">$300</span></td></tr>
+        <tr><td><strong>Aplicación De Scrub</strong></td><td><span class="price-pill">$250</span></td></tr>
+        <tr><td><strong>Aplicación De Keratin</strong></td><td><span class="price-pill">$150</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- COLOR (CON "DESDE") -->
-    <section>
-      <h2>Color</h2>
-      <table>
-        <caption>Servicios de color y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Cambio de color</td><td>Desde 4,500</td></tr>
-          <tr><td>Color completo</td><td>Desde 3,800</td></tr>
-          <tr><td>Corrección de color</td><td>Desde 6,500</td></tr>
-          <tr><td>Matizado</td><td>Desde 2,500</td></tr>
-          <tr><td>Retoque de canas</td><td>Desde 4,000</td></tr>
-          <tr><td>Técnicas de color</td><td>Desde 9,000</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 4. TRATAMIENTOS DE CABINA -->
+    <h2>Tratamientos De Cabina</h2>
+    <table>
+      <caption>Servicios Y Sus Precios</caption>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Genoma</strong></td><td><span class="price-pill">$3500</span></td></tr>
+        <tr><td><strong>Botulínica</strong></td><td><span class="price-pill">$3500</span></td></tr>
+        <tr><td><strong>Acidic Boonding</strong></td><td><span class="price-pill">$3500</span></td></tr>
+        <tr><td><strong>Renew</strong></td><td><span class="price-pill">$3000</span></td></tr>
+        <tr><td><strong>Sistema Lendan</strong></td><td><span class="price-pill">$2500</span></td></tr>
+        <tr><td><strong>Matrix Instacure</strong></td><td><span class="price-pill">$2000</span></td></tr>
+        <tr><td><strong>Dark Envy</strong></td><td><span class="price-pill">$1500</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- LAVADOS CON LÍNEA (CON "DESDE") -->
-    <section>
-      <h2>Lavados con Línea</h2>
-      <table>
-        <caption>Servicios de lavado y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Combinaciones de otras líneas</td><td>Desde 1,000</td></tr>
-          <tr><td>Keratin</td><td>Desde 150</td></tr>
-          <tr><td>Matrix verde, emulpon, Biolage</td><td>Desde 1,200</td></tr>
-          <tr><td>Redken protección color, frizz dismiss, extreme</td><td>Desde 1,500</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 5. CORTES (DEJAR IGUAL) -->
+    <h2>Cortes</h2>
+    <table>
+      <caption>Servicios De Cortes Y Sus Precios</caption>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cortes De Puntas</strong></td><td><span class="price-pill">$1300</span></td></tr>
+        <tr><td><strong>Cortes Elaborados</strong></td><td><span class="price-pill">$1500</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- TRATAMIENTOS DE CABINA (CON "DESDE") -->
-    <section>
-      <h2>Tratamientos de Cabina</h2>
-      <table>
-        <caption>Servicios de tratamientos y sus precios</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Acidic boonding</td><td>Desde 3,500</td></tr>
-          <tr><td>Botulinica</td><td>Desde 3,500</td></tr>
-          <tr><td>Cirugía capilar</td><td>Desde 3,500</td></tr>
-          <tr><td>Dark envy</td><td>Desde 1,500</td></tr>
-          <tr><td>Genoma</td><td>Desde 3,500</td></tr>
-          <tr><td>Matrix instacure</td><td>Desde 2,000</td></tr>
-          <tr><td>Renew</td><td>Desde 3,000</td></tr>
-          <tr><td>Sistema lendan</td><td>Desde 2,500</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 6. COLOR (DE MAYOR A MENOR) -->
+    <h2>Color</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Técnicas De Color</strong></td><td><span class="price-pill">$9000</span></td></tr>
+        <tr><td><strong>Corrección De Color</strong></td><td><span class="price-pill">$6500</span></td></tr>
+        <tr><td><strong>Cambio De Color</strong></td><td><span class="price-pill">$4500</span></td></tr>
+        <tr><td><strong>Retoque De Canas</strong></td><td><span class="price-pill">$4000</span></td></tr>
+        <tr><td><strong>Color Completo</strong></td><td><span class="price-pill">$3800</span></td></tr>
+        <tr><td><strong>Matizado</strong></td><td><span class="price-pill">$2500</span></td></tr>
+      </tbody>
+    </table>
 
-    <!-- APLICACIONES DE PRODUCTOS (CON "DESDE") -->
-    <section>
-      <h2>Aplicaciones de Productos (Que traigan al salon)</h2>
-      <table>
-        <caption>Servicios con productos que el cliente traiga</caption>
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Precio (RD$)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Aplicación de alisado</td><td>Desde 1,500</td></tr>
-          <tr><td>Aplicación de tinte</td><td>Desde 1,500</td></tr>
-          <tr><td>Cirugía capilar</td><td>Desde 3,500</td></tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- 7. APLICACIÓN DE PRODUCTOS (DE MAYOR A MENOR) -->
+    <h2>Aplicación De Productos (Que Traigan Al Salón)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Precio (RD$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cirugía Capilar</strong></td><td><span class="price-pill">$3500</span></td></tr>
+        <tr><td><strong>Aplicación De Alisado</strong></td><td><span class="price-pill">$1500</span></td></tr>
+        <tr><td><strong>Aplicación De Tinte</strong></td><td><span class="price-pill">$1500</span></td></tr>
+      </tbody>
+    </table>
 
   </div>
 
-  <!-- Pie de página -->
   <footer>
-    <p>© 2025 Salón Sagittarius - Todos los derechos reservados</p>
+    <p>© 2025 Salón Sagittarius - Todos Los Derechos Reservados</p>
   </footer>
-
 </body>
 </html>
